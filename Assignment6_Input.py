@@ -1,12 +1,16 @@
 from collections import Counter
 
 def avg_weight(x):
-    avg = (sum(x)/len(x))
+    avg = f'{(sum(x)/len(x)):.2f}'
     return avg
-def star_histogram(items): #A function to create a star histogram
-    if items > 0:
-        return('*'*items)
-    print(star_histogram())
+def star_histogram(lakes): #A function to create a star histogram
+    print(f'{"Lake":^10} {"Fish Count":^10}')
+    print('-' * 23)
+    for key in lakes:
+        if lakes[key] != "":
+            print(f'{key:^10} {"|"} {int(lakes[key])* "*":^6}')
+        else:
+            print(f'{key:^8} {"|"} {" "}')
 
 def lakecount(lakes): #A function to count the amount of times each lake shows up in the input list
     for x in lakes:
@@ -20,10 +24,10 @@ def lakecount(lakes): #A function to count the amount of times each lake shows u
 n = int(input("Enter number of IDs : "))
 print("Enter Lake ID's")
 lake_id = []
-for i in range(0, n): #A for loop to allow for multiple inputs
-    id = int(input())
-    lake_id.append(id)  # adding the value to lake_id
-print("Entered Lake ID's:",lake_id)
+for i in range(0, n + 1): #A for loop to allow for multiple inputs
+    if i != 0:
+        id = int(input())
+        lake_id.append(id)   # adding the value to lake_id
 
 #Creating list of lake names via input
 n2= int(input("Enter Number of Lakes: "))
@@ -32,21 +36,23 @@ lake_name = []
 for i in range(0, n2): #A for loop to allow for multiple inputs
     name = input()
     lake_name.append(name) #Adding value to lake_name
-print("Entered Lake Names:", lake_name)
 
 #Creating list of fish weights taken from the lakes
 n3 = int(input("Enter number of Fish Weights: "))
 print("Enter Fish Weights:")
 fish_weight = []
 for i in range(0, n3):  # A for loop to allow for multiple inputs
-    lbs = float(input())
-    fish_weight.append(lbs)  # Adding value to lake_name
-print("Entered Fish Weights:", fish_weight)
+    if i == float:
+        lbs = float(input())
+        fish_weight.append(lbs)  # Adding value to lake_name
+
 print('\n')
+
 #Printing all associated input lists
 print('Entered Lake IDs:', lake_id)
 print("Entered Lake Names:", lake_name)
 print("Entered Fish Weights:", fish_weight)
+print('\n')
 
 #Printing the neat table of the inputs
 print(f'{"Lake ID":^10} {"Lake Name":^12} {"Fish Weight":^8}')
@@ -62,9 +68,7 @@ print("Average Fish Weight:",avg_weight(fish_weight))
 print("Heaviest Fish:", max(fish_weight))
 print("Lightest Fish:", min(fish_weight))
 
-print(lakecount(lake_name)) #Using the lakecount function to group the # of lakes together
-#Next step: make star histogram w/ counter
-# KEY / VALUE system!
-
 #Printed Star Histogram
 print('\n')
+Grouped_count = lakecount(lake_name)
+star_histogram(Grouped_count)
