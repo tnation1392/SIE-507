@@ -42,9 +42,8 @@ n3 = int(input("Enter number of Fish Weights: "))
 print("Enter Fish Weights:")
 fish_weight = []
 for i in range(0, n3):  # A for loop to allow for multiple inputs
-    if i == float:
-        lbs = float(input())
-        fish_weight.append(lbs)  # Adding value to lake_name
+    lbs = float(input())
+    fish_weight.append(lbs)  # Adding value to lake_name
 
 print('\n')
 
