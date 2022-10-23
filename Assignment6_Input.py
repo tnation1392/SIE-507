@@ -1,3 +1,5 @@
+#Todd Nason
+#A program to take input data about fish and formulate statistics and create a star histogram
 from collections import Counter
 
 def avg_weight(x):
@@ -24,26 +26,46 @@ def lakecount(lakes): #A function to count the amount of times each lake shows u
 n = int(input("Enter number of IDs : "))
 print("Enter Lake ID's")
 lake_id = []
-for i in range(0, n + 1): #A for loop to allow for multiple inputs
-    if i != 0:
+for i in range(0, n + 1):  # A for loop to allow for multiple inputs
+    try:
+        if i != 0:
+            id = int(input())
+            lake_id.append(id)  # adding the value to lake_id
+    except ValueError:
+        print("Invalid input, please re-enter")
         id = int(input())
-        lake_id.append(id)   # adding the value to lake_id
+        lake_id.append(id)
 
 #Creating list of lake names via input
 n2= int(input("Enter Number of Lakes: "))
 print("Enter Associated Lake Names:")
 lake_name = []
-for i in range(0, n2): #A for loop to allow for multiple inputs
-    name = input()
-    lake_name.append(name) #Adding value to lake_name
+for i in range(0, n2):                                      #A for loop to allow for multiple inputs
+    try:
+        name = input()
+        if name.isalpha() is True:
+            lake_name.append(name)
+        else:
+            print("Invalid input, please re-enter")
+            id = input()
+            lake_name.append(id)
+    except ValueError:
+        print("Invalid input, please re-enter")
+        id = int(input())
+        lake_name.append(id)                                              #Adding value to lake_name
 
 #Creating list of fish weights taken from the lakes
 n3 = int(input("Enter number of Fish Weights: "))
 print("Enter Fish Weights:")
 fish_weight = []
-for i in range(0, n3):  # A for loop to allow for multiple inputs
-    lbs = float(input())
-    fish_weight.append(lbs)  # Adding value to lake_name
+for i in range(0, n3):                                  # A for loop to allow for multiple inputs
+    try:
+        lbs = float(input())
+        fish_weight.append(lbs)                                         # Adding value to lake_name
+    except ValueError:
+        print("Invalid input, please re-enter")
+        lbs = float(input())
+        fish_weight.append(lbs)                                         # Adding value to lake_name
 
 print('\n')
 
