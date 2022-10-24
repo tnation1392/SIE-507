@@ -2,9 +2,11 @@
 #A program to take input data about fish and formulate statistics and create a star histogram
 from collections import Counter
 
-def avg_weight(x):
+# A function to calculate the average of a set of integers or floats
+def avg_weight(x): 
     avg = f'{(sum(x)/len(x)):.2f}'
     return avg
+
 def star_histogram(lakes): #A function to create a star histogram
     print(f'{"Lake":^10} {"Fish Count":^10}')
     print('-' * 23)
@@ -14,7 +16,8 @@ def star_histogram(lakes): #A function to create a star histogram
         else:
             print(f'{key:^8} {"|"} {" "}')
 
-def lakecount(lakes): #A function to count the amount of times each lake shows up in the input list
+#A function to count the amount of times each lake shows up in the input list
+def lakecount(lakes): 
     for x in lakes:
         final = []
         count = lakes.count(x)
@@ -25,7 +28,7 @@ def lakecount(lakes): #A function to count the amount of times each lake shows u
 #Creating the list of lake ID's via input
 n = int(input("Enter number of IDs : "))
 print("Enter Lake ID's")
-lake_id = []
+lake_id = []  #an empty list for the lake ids
 for i in range(0, n + 1):  # A for loop to allow for multiple inputs
     try:
         if i != 0:
@@ -39,8 +42,8 @@ for i in range(0, n + 1):  # A for loop to allow for multiple inputs
 #Creating list of lake names via input
 n2= int(input("Enter Number of Lakes: "))
 print("Enter Associated Lake Names:")
-lake_name = []
-for i in range(0, n2):                                      #A for loop to allow for multiple inputs
+lake_name = []  #An empty list for lake_names to be appended into
+for i in range(0, n2):  #A for loop to allow for multiple inputs
     try:
         name = input()
         if name.isalpha() is True:
@@ -52,20 +55,20 @@ for i in range(0, n2):                                      #A for loop to allow
     except ValueError:
         print("Invalid input, please re-enter")
         id = int(input())
-        lake_name.append(id)                                              #Adding value to lake_name
+        lake_name.append(id) #Adding value to lake_name
 
 #Creating list of fish weights taken from the lakes
 n3 = int(input("Enter number of Fish Weights: "))
 print("Enter Fish Weights:")
-fish_weight = []
-for i in range(0, n3):                                  # A for loop to allow for multiple inputs
+fish_weight = []  #An empty list for fish weights to be appended into
+for i in range(0, n3):  # A for loop to allow for multiple inputs
     try:
         lbs = float(input())
-        fish_weight.append(lbs)                                         # Adding value to lake_name
+        fish_weight.append(lbs)  # Adding value to lake_name
     except ValueError:
         print("Invalid input, please re-enter")
         lbs = float(input())
-        fish_weight.append(lbs)                                         # Adding value to lake_name
+        fish_weight.append(lbs)  # Adding value to lake_name
 
 print('\n')
 
@@ -91,5 +94,5 @@ print("Lightest Fish:", min(fish_weight))
 
 #Printed Star Histogram
 print('\n')
-Grouped_count = lakecount(lake_name)
-star_histogram(Grouped_count)
+Grouped_count = lakecount(lake_name) #Using the Grouped_count function to get a count of the times a lakes name is entered 
+star_histogram(Grouped_count) #Using the star_histogram function to create the star pattern histogram from the grouped_count results
