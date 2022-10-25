@@ -4,8 +4,11 @@ from collections import Counter
 
 # A function to calculate the average of a set of integers or floats
 def avg_weight(x):
-    avg = f'{(sum(x)/len(x)):.2f}'
-    return avg
+    if len(x) == 0:
+        print("No statistics")
+    else:
+        avg = f'{(sum(x)/len(x)):.2f}'
+        return avg
 
 def star_histogram(lakes): #A function to create a star histogram
     print(f'{"Lake":^10} {"Fish Count":^10}')
@@ -93,10 +96,22 @@ max_fish = max(fish_weight)  #The maximum weight from the inputs
 min_fish = min(fish_weight)  #The minimum weight from the inputs
 
 print("Statistics of Input:")
-print("Total Number of Fish:", fish_num)
+if fish_num == 0:
+    print("No statistics")  #Error check for if there are no fish entered
+else:
+    print("Total Number of Fish:", fish_num)
+
 print("Average Fish Weight:", avg_list)
-print("Heaviest Fish:", max_fish)
-print("Lightest Fish:", min_fish)
+
+if max_fish <= 0:
+    print("No statistics")  #Error check for the heaviest fish
+else:
+    print("Heaviest Fish:", max_fish)
+
+if min_fish <= 0:
+    print("No statistics") #Error check for the lightest fish
+else:
+    print("Lightest Fish:", min_fish)
 
 #Printed Star Histogram
 print('\n')
