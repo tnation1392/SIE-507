@@ -3,7 +3,7 @@
 from collections import Counter
 
 # A function to calculate the average of a set of integers or floats
-def avg_weight(x): 
+def avg_weight(x):
     avg = f'{(sum(x)/len(x)):.2f}'
     return avg
 
@@ -17,7 +17,7 @@ def star_histogram(lakes): #A function to create a star histogram
             print(f'{key:^8} {"|"} {" "}')
 
 #A function to count the amount of times each lake shows up in the input list
-def lakecount(lakes): 
+def lakecount(lakes):
     for x in lakes:
         final = []
         count = lakes.count(x)
@@ -86,13 +86,19 @@ for i in range(len(lake_id)):
 print('\n')
 
 #Statistics of the fish
-print("Statistics of input:")
-print("Total Number of Fish:", len(fish_weight))
-print("Average Fish Weight:",avg_weight(fish_weight))
-print("Heaviest Fish:", max(fish_weight))
-print("Lightest Fish:", min(fish_weight))
+
+fish_num = len(fish_weight) # The number of fishes entered
+avg_list = avg_weight(fish_weight)  #The average weight from the inputs
+max_fish = max(fish_weight)  #The maximum weight from the inputs
+min_fish = min(fish_weight)  #The minimum weight from the inputs
+
+print("Statistics of Input:")
+print("Total Number of Fish:", fish_num)
+print("Average Fish Weight:", avg_list)
+print("Heaviest Fish:", max_fish)
+print("Lightest Fish:", min_fish)
 
 #Printed Star Histogram
 print('\n')
-Grouped_count = lakecount(lake_name) #Using the Grouped_count function to get a count of the times a lakes name is entered 
+Grouped_count = lakecount(lake_name) #Using the Grouped_count function to get a count of the times a lakes name is entered
 star_histogram(Grouped_count) #Using the star_histogram function to create the star pattern histogram from the grouped_count results
