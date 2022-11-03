@@ -1,5 +1,12 @@
-def display(carpark_dataset):
-    print(carpark_dataset.read())
+def display(file):
+    list = []
+    for each in file.readlines():
+        if each[-1] == '\n':
+            list.append(each[0:-1])
+        else:
+            list.append(each)
+    print(list)
+
 def statistics(file):
     with open(file, 'r') as cp:
         contents = cp.read()
@@ -11,6 +18,7 @@ def statistics(file):
         occupied = round((X/80)*100, 1)
         print(occupied)
 
+cp = open("carpark.txt")
 print("Select your choice from the menu:",'\n',
         "D to display current status of the car park",'\n',
         "R to reserve an empty slot in the car park",'\n',
@@ -20,11 +28,11 @@ Start_input = input("Enter here:")
 print('\n')
 
 if Start_input == "D" or "d":
-    display("carpark.txt")
+    display(cp)
 #if Start_input == "R" or "r":
     #place reserve function here!
-#if Start_input == "S" or "s":
-#place statistic function here!
+if Start_input == "S" or "s":
+    statistics(cp)
 #if Start_input == "Q" or "q":
 else:
     print("Incorrect input, goodbye")
