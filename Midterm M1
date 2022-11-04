@@ -6,7 +6,18 @@ def display(file):  #a function to read a file and integrate row numbers and let
             print(f'{count:^2} {line:^4}')
         else:
             continue
-
+            
+def reserve():
+    c,r = input("Please enter the spot you would like to reserve: ")
+    print(f'You have entered: {c}{r}')
+    try:
+        value = int(r)
+    except ValueError:
+        print("That's not a row number!")
+    alph = ['A','B','C','D','E','F','G','H']
+    if c not in alph:
+        print("Incorrect column input")
+        
 cp = open("carpark.txt")
 
 print("Select your choice from the menu:",'\n',
