@@ -1,38 +1,29 @@
-def display(file):
-    list = []
-    for each in file.readlines():
-        if each[-1] == '\n':
-            list.append(each[0:-1])
+def display(file):  #a function to read a file and integrate row numbers and letter headers in the column of the file object
+    letters = 'ABCD EFGH'
+    print(f'{letters:^15}' + '\n')
+    for count, line in enumerate(file, start=1):
+        if line != '\n':
+            print(f'{count:^2} {line:^4}')
         else:
-            list.append(each)
-    print(list)
-
-def statistics(file):
-    with open(file, 'r') as cp:
-        contents = cp.read()
-        X = 0
-        for n in contents:
-            if n == "X":
-                X += 1
-        print(X)
-        occupied = round((X/80)*100, 1)
-        print(occupied)
+            continue
 
 cp = open("carpark.txt")
+
 print("Select your choice from the menu:",'\n',
         "D to display current status of the car park",'\n',
         "R to reserve an empty slot in the car park",'\n',
         "S to display % occupancy of the car park",'\n',
         "Q to quit")
-Start_input = input("Enter here:")
+Start_input = input("Enter here: ")
 print('\n')
-
-if Start_input == "D" or "d":
+if len(Start_input) == 0:
+    print("Incorrect input, goodbye")
+elif Start_input == 'D' or "d":
     display(cp)
-#if Start_input == "R" or "r":
+#elif Start_input == "R" or "r":
     #place reserve function here!
-if Start_input == "S" or "s":
-    statistics(cp)
-#if Start_input == "Q" or "q":
+#elif Start_input == "S" or "s":
+
+#elif Start_input == "Q" or "q":
 else:
     print("Incorrect input, goodbye")
