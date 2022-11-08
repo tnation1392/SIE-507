@@ -1,15 +1,12 @@
 cp = open("carpark.txt","r+")
-print(cp.read().splitlines())
 
-def display(
-        file):  # a function to read a file and integrate row numbers and letter headers in the column of the file object
+def display(file):  # a function to read a file and integrate row numbers and letter headers in the column of the file object
     letters = 'ABCD EFGH'
     print(f'{letters:^15}' + '\n')
     for count, line in enumerate(file, start=1):
         if line != '\n':
             print(f'{count:^2} {line:^4}')
-        else:
-            continue
+
 
 def reserve():
     c, r = input("Please enter the spot you would like to reserve: ")
@@ -45,7 +42,7 @@ Start_input = input("Input: ")
 
 if Start_input == "D":
     print('\n')
-    display(cp)
+    display(cp.readlines())
 #elif Start_input == "R":
     #reserve(cp)
 # place reserve function here!
