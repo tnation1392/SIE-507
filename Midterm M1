@@ -8,6 +8,7 @@ def display(file):  # a function to read a file and integrate row numbers and le
             print(f'{count:^2} {line:^4}')
 
 
+
 def reserve():
     c, r = input("Please enter the spot you would like to reserve: ")
     print(f'You have entered: {c}{r}')
@@ -45,12 +46,12 @@ if Start_input == "D":
     display(cp.readlines())
 #elif Start_input == "R":
     #reserve(cp)
-# place reserve function here!
+    # place reserve function here!
 elif Start_input == "S":
     print("\n")
     statistics(cp)
-# elif Start_input == "Q":
-elif len(Start_input) == 0:
-    print("Incorrect input, goodbye")
+elif Start_input == "Q":
+    exit(0)
 else:
     print("Incorrect input, goodbye")
+    exit(0)
