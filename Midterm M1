@@ -17,22 +17,14 @@ def translate(input):
         transnum = numlet[input]
         return transnum
 
-def assign_spot(x,y):
-    dataset = []
-    for row in cp.readlines():
-        if row != '\n':
-            if row[-1] == '\n':
-                dataset.append(row[0:-1])
-            else:
-                dataset.append(row)
-    print(dataset)
+def assign_spot(set,x,y):
 
     park = open("temp_park.txt","w")
-    spot = dataset[x][y]
+    spot = set[x][y]
     if spot == 'O':
         print("Reserving spot....")
-        dataset[x][y] == 'X'
-        temp = str(dataset)
+        set[x][y].replace('O','X')
+        temp = str(set)
         park.write(temp)
         park.close()
 
@@ -42,7 +34,7 @@ def assign_spot(x,y):
 
 def reserve(file):
     dataset = []
-    for row in cp.readlines():
+    for row in file.readlines():
         if row != '\n':
             if row[-1] == '\n':
                 dataset.append(row[0:-1])
@@ -90,61 +82,9 @@ def reserve(file):
         print("This spot is available!")
         opp = input("Would you like to reserve this spot?: (y/n)")
         if opp == "y":
-            assign_spot(x, y)
+            assign_spot(dataset, row, column)
+        if opp == "n":
             exit(0)
-        if opp =="n":
-            exit(0)
-
-def reserve(file):
-    dataset = []
-    for row in cp.readlines():
-        if row != '\n':
-            if row[-1] == '\n':
-                dataset.append(row[0:-1])
-            else:
-                dataset.append(row)
-    print(dataset)
-
-    r, c = (input("Please enter the spot you would like to reserve: "))
-    row = int(r)
-    print(f'You have entered: {r}{c}')
-
-    try:
-        if row < -1:
-            print("There are no negative rows!")
-    except ValueError:
-        print("That's not a row number!")
-    alph = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
-    if c not in alph:
-        print("Incorrect column input")
-    column = translate(c)
-    if dataset[row][0][column] == "X":
-        print("This spot is occupied")
-        auto = input("Would you like to search for the closest open spot?: (y/n)")
-        if auto == "y":
-            current_row = current_column = 0
-            max_row = len(dataset)
-            max_column = len(dataset[0])
-
-            while current_row <= max_row and current_column <= max_column:
-                for x in range(0, current_row):
-                    for y in range(0, current_column):
-                        if dataset[x][y] == 'O':
-                            print("The closest open spot is in",x,y)
-                            take = input("Would you like to reserve this spot?: (y/n)")
-                            if take == "y":
-                                assign_spot(x,y)
-
-                            exit(0)
-
-                current_row += 1
-                current_column += 1
-
-    if dataset[row][0][column] == "O":
-        print("This spot is available!")
-
-
-
 
 def statistics(file):
     contents = file.read()
