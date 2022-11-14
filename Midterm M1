@@ -1,4 +1,6 @@
-cp = open("carpark.txt","r+")
+#Todd Nason SIE 507 Midterm project
+
+cp = open("carpark.txt","r+") #opens the carpark txt file
 
 def display(file):  # a function to read a file and integrate row numbers and letter headers in the column of the file object
     letters = 'ABCD EFGH'
@@ -11,28 +13,26 @@ def display(file):  # a function to read a file and integrate row numbers and le
 
 
 
-def translate(input):
-    numlet = {'A':0,'B':1,'C':2,'D':3,'E':4,'F':5,'G':6,'H':7}
+def translate(input): #A function to translate the letters from the column into integer coordinates for other functions
+    numlet = {'A':0,'B':1,'C':2,'D':3,'E':4,'F':5,'G':6,'H':7}  #A dictionary that contains the letters and the corresponding integers
     if input in numlet.keys():
         transnum = numlet[input]
         return transnum
 
-def assign_spot(set,x,y):
-
-    park = open("temp_park.txt","w")
+def assign_spot(set,x,y): # A function to open a temporary file with the carpark data and assign a given spot as occupied
+    park = open("temp_park.txt","w")  #Opens the new file for the spot assignment
     spot = set[x][y]
     if spot == 'O':
         print("Reserving spot....")
-        set[x][y].replace('O','X')
+        set[x][y].replace('O','X') #If the spot is available the function replaces the O with an X
         temp = str(set)
         park.write(temp)
         park.close()
-
     else:
         print("This spot is already taken!")
     print("Spot is now reserved!")
 
-def reserve(file):
+def reserve(file): # A function to see if a spot is open or search for an open spot, then reserve it
     dataset = []
     for row in file.readlines():
         if row != '\n':
@@ -44,7 +44,7 @@ def reserve(file):
 
     r, c = (input("Please enter the spot you would like to reserve: "))
     row = int(r)
-    print(f'You have entered: {r}{c}')
+    print(f'You have entered: {r}{c}') #An input for the spot coordinates
 
     try:
         if row < -1:
@@ -54,7 +54,7 @@ def reserve(file):
     alph = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
     if c not in alph:
         print("Incorrect column input")
-    column = translate(c)
+    column = translate(c)  #Uses the translate function to create a numerical coordinate to use
     if dataset[row][column] == "X":
         print("This spot is occupied")
         auto = input("Would you like to search for the closest open spot?: (y/n)")
@@ -63,7 +63,7 @@ def reserve(file):
             max_row = len(dataset)
             max_column = len(dataset[0])
 
-            while current_row <= max_row and current_column <= max_column:
+            while current_row <= max_row and current_column <= max_column: #This is the nearest neighbor algorithm
                 for x in range(0, current_row):
                     for y in range(0, current_column):
                         if dataset[x][y] == 'O':
@@ -80,13 +80,13 @@ def reserve(file):
 
     if dataset[row][column] == "O":
         print("This spot is available!")
-        opp = input("Would you like to reserve this spot?: (y/n)")
+        opp = input("Would you like to reserve this spot?: (y/n)") #Allows the user to reserve the spot if open
         if opp == "y":
             assign_spot(dataset, row, column)
         if opp == "n":
             exit(0)
 
-def statistics(file):
+def statistics(file): # a function to return the percent of the parking lot that is occupied
     contents = file.read()
     total_spots = 80
     Xcount = 0
@@ -101,18 +101,19 @@ print("Select your choice from the menu:", '\n',
       "R to reserve an empty slot in the car park", '\n',
       "S to display % occupancy of the car park", '\n',
       "Q to quit")
-Start_input = input("Input: ")
+Start_input = input("Input: ") # The starting menu for the program
 
 if Start_input == "D":
     print('\n')
+    display(cp.readlines)  #Uses the display function
     display(cp.readlines())
 elif Start_input == "R":
-    reserve(cp)
+    reserve(cp)  #Uses the reserve function
 elif Start_input == "S":
     print("\n")
-    statistics(cp)
+    statistics(cp)  #Uses the statistics function
 elif Start_input == "Q":
-    exit(0)
+    exit(0)  #Exits the display menu
 else:
     print("Incorrect input, goodbye")
-    exit(0)
+    exit(0)  #Exits the display menu if there is an empty or incorrect input
