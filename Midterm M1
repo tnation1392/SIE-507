@@ -26,8 +26,9 @@ def assign_spot(set,x,y): # A function to open a temporary file with the carpark
     print(spot)
     if spot == 'O':
         print("Reserving spot....")
-        temp = list(set)
+        temp = set
         temp[x][y].replace('O','X') #If the spot is available the function replaces the O with an X
+        print(x,y)
         print(temp[x][y])
         print(temp)
         temp = str(temp)
@@ -118,15 +119,15 @@ def main():
     while keep_going == True:
         choice = menu()
         if choice in ("D","d"):
-            print('\n')
+            print('D\n')
             display(cp.readlines())#Uses the display function
             print('\n')
         elif choice in ("R","r"):
-            print('\n')
+            print('R\n')
             reserve(cp)  #Uses the reserve function
             print('\n')
         elif choice in ("S","s"):
-            print('\n',statistics(cp),"% of the parking lot is occupied",'\n')  #Uses the statistics function
+            print('S\n',statistics(cp),"% of the parking lot is occupied",'\n')  #Uses the statistics function
         elif choice in ("Q","q"):
             keep_going = False  #Quits out of the program
         else:
