@@ -21,12 +21,16 @@ def translate(input): #A function to translate the letters from the column into 
         exit(0)
 
 def assign_spot(set,x,y): # A function to open a temporary file with the carpark data and assign a given spot as occupied
-    park = open("temp_park.txt","w")  #Opens the new file for the spot assignment
+    park = open("temp_park.txt","r+")  #Opens the new file for the spot assignment
     spot = set[x][y]
+    print(spot)
     if spot == 'O':
         print("Reserving spot....")
-        set[x][y].replace('O','X') #If the spot is available the function replaces the O with an X
-        temp = str(set)
+        temp = list(set)
+        temp[x][y].replace('O','X') #If the spot is available the function replaces the O with an X
+        print(temp[x][y])
+        print(temp)
+        temp = str(temp)
         park.write(temp)
         print("Spot is now reserved!")
         park.close()
@@ -72,12 +76,14 @@ def reserve(file): # A function to see if a spot is open or search for an open s
                             print("The closest open spot is in",x,y)
                             take = input("Would you like to reserve this spot?: (y/n)")
                             if take == "y":
-                                assign_spot(x,y)
+                                assign_spot(dataset,x,y)
                                 exit(0)
                             if take == "n":
                                 exit(0)
                 current_row += 1
                 current_column += 1
+        else:
+            exit(0)
 
     if dataset[row][column] == "O":
         print("This spot is available!")
@@ -96,23 +102,34 @@ def statistics(file): # a function to return the percent of the parking lot that
             Xcount += 1
     percent = round((Xcount/total_spots) * 100,1)
     print(f'{percent}% of the parking lot is occupied')
-
-print("Select your choice from the menu:", '\n',  #The main menu
-      "D to display current status of the car park", '\n',
-      "R to reserve an empty slot in the car park", '\n',
-      "S to display % occupancy of the car park", '\n',
-      "Q to quit")
-Start_input = input("Input: ") # The starting menu for the program
-if Start_input == "D":
-    print('\n')
-    display(cp.readlines())  #Uses the display function
-elif Start_input == "R":
-    reserve(cp)  #Uses the reserve function
-elif Start_input == "S":
-    print("\n")
-    statistics(cp)  #Uses the statistics function
-elif Start_input == "Q":
-    exit(0)  #Exits the display menu
-else:
+def menu():
+    text = (print(
+        "Select your choice from the menu:", '\n',  #The main menu
+        "D to display current status of the car park", '\n',
+        "R to reserve an empty slot in the car park", '\n',
+        "S to display % occupancy of the car park", '\n',
+        "Q to quit",'\n',
+        "Input :"))
+    return input(text)
+def main():
+    keep_going = True
+    while keep_going == True:
+        choice = menu()
+        if choice in ("D","d"):
+            print('\n')
+            display(cp.readlines())  #Uses the display function
+        elif choice in ("R","r"):
+            reserve(cp)  #Uses the reserve function
+        elif choice in ("S","s"):
+            print("\n")
+            statistics(cp)  #Uses the statistics function
+        elif choice in ("Q","q"):
+            keep_going == False
+        else:
+            pass
+    else:
+        exit(0)
     print("Incorrect input, goodbye")
-    exit(0)  #Exits the display menu if there is an empty or incorrect input
+
+
+main()
