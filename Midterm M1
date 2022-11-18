@@ -1,4 +1,5 @@
 #Todd Nason SIE 507 Midterm project
+#A program to display a view of the carpark, tell the user how full it is, and reserve a spot via functions
 
 cp = open("carpark.txt","r+") #opens the carpark txt file
 
@@ -23,14 +24,10 @@ def translate(input): #A function to translate the letters from the column into 
 def assign_spot(set,x,y): # A function to open a temporary file with the carpark data and assign a given spot as occupied
     park = open("temp_park.txt","r+")  #Opens the new file for the spot assignment
     spot = set[x][y]
-    print(spot)
     if spot == 'O':
         print("Reserving spot....")
         temp = set
         temp[x][y].replace('O','X') #If the spot is available the function replaces the O with an X
-        print(x,y)
-        print(temp[x][y])
-        print(temp)
         temp = str(temp)
         park.write(temp)
         print("Spot is now reserved!")
@@ -53,7 +50,7 @@ def reserve(file): # A function to see if a spot is open or search for an open s
     row = int(r)
     print(f'You have entered: {r}{c}') #An input for the spot coordinates
 
-    try:
+    try:  #Error handling for the function
         if row < -1:
             print("There are no negative rows!")
     except ValueError:
@@ -61,6 +58,7 @@ def reserve(file): # A function to see if a spot is open or search for an open s
     alph = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
     if c not in alph:
         print("Incorrect column input")
+
     column = translate(c)  #Uses the translate function to create a numerical coordinate to use
     if dataset[row][column] == "X":
         print("This spot is occupied")
@@ -105,37 +103,38 @@ def statistics(file): # a function to return the percent of the parking lot that
     percent = round((Xcount/total_spots) * 100,1)
     return percent
 
-def menu():
+def menu():  #A function to print out the menu options and take an input from the user
     print(
         "Select your choice from the menu:", '\n',  #The main menu
         "D to display current status of the car park", '\n',
         "R to reserve an empty slot in the car park", '\n',
         "S to display % occupancy of the car park", '\n',
         "Q to quit")
-    return input("Input: ")
-
-def main():
-    keep_going = True
-    while keep_going == True:
-        choice = menu()
-        if choice in ("D","d"):
-            print('D\n')
-            display(cp.readlines())#Uses the display function
-            print('\n')
-        elif choice in ("R","r"):
-            print('R\n')
-            reserve(cp)  #Uses the reserve function
-            print('\n')
-        elif choice in ("S","s"):
-            print('S\n',statistics(cp),"% of the parking lot is occupied",'\n')  #Uses the statistics function
-        elif choice in ("Q","q"):
-            keep_going = False  #Quits out of the program
-        else:
-            pass
-    else:
-        exit(0)
-    print("Incorrect input, goodbye")
-
+    return input("Input: \n")
 
 if __name__ == '__main__':
-    main()
+
+    def main():  # A function to loop the display menu and call associated functions according to the input from menu()
+        keep_going = True
+        while keep_going == True:
+            choice = menu()
+            if choice in ("D", "d"):
+                print('You have selected D\n')
+                display(cp.readlines())  # Uses the display function
+                print('\n')
+            elif choice in ("R", "r"):
+                print('You have selected R\n')
+                reserve(cp)  # Uses the reserve function
+                print('\n')
+            elif choice in ("S", "s"):
+                print("You have selected S\n")
+                print(statistics(cp), '% of the parking lot is occupied\n')  # Uses the statistics function
+            elif choice in ("Q", "q"):
+                print("Goodbye")
+                keep_going = False  # Quits out of the program
+            else:
+                pass
+        else:
+            exit(0)
+        print("Incorrect input, goodbye")
+    main()  #Running the main menu
