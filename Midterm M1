@@ -1,8 +1,6 @@
 #Todd Nason SIE 507 Midterm project
 #A program to display a view of the carpark, tell the user how full it is, and reserve a spot via functions
-
-cp = open("carpark.txt","r+") #opens the carpark txt file
-
+cp = open("carpark.txt", "r+")
 def display(file):  # a function to read a file and integrate row numbers and letter headers in the column of the file object
     letters = 'ABCD EFGH'
     print(f'{letters:^15}')
@@ -38,7 +36,7 @@ def assign_spot(set,x,y): # A function to open a temporary file with the carpark
 
 def reserve(file): # A function to see if a spot is open or search for an open spot, then reserve it
     dataset = []
-    for row in file.readlines():  #this will print the file in the form of a list
+    for row in file:  #this will print the file in the form of a list
         if row != '\n':
             if row[-1] == '\n':
                 dataset.append(row[0:-1])
@@ -92,15 +90,15 @@ def reserve(file): # A function to see if a spot is open or search for an open s
             assign_spot(dataset, row, column)
         if opp == "n":
             exit(0)
-
 def statistics(file): # a function to return the percent of the parking lot that is occupied
     contents = file.read()
     total_spots = 80
-    Xcount = 0
+    xcount = 0
     for n in contents:
         if n == "X":
-            Xcount += 1
-    percent = round((Xcount/total_spots) * 100,1)
+            xcount += 1
+    print(xcount,"spots are occupied out of the 80")
+    percent = round((xcount/total_spots) * 100,1)
     return percent
 
 def menu():  #A function to print out the menu options and take an input from the user
@@ -120,15 +118,18 @@ if __name__ == '__main__':
             choice = menu()
             if choice in ("D", "d"):
                 print('You have selected D\n')
-                display(cp.readlines())  # Uses the display function
+                display(cp.readlines())
+                cp.seek(0)# Uses the display function
                 print('\n')
             elif choice in ("R", "r"):
                 print('You have selected R\n')
-                reserve(cp)  # Uses the reserve function
+                reserve(cp)# Uses the reserve function
+                cp.seek(0)
                 print('\n')
             elif choice in ("S", "s"):
                 print("You have selected S\n")
                 print(statistics(cp), '% of the parking lot is occupied\n')  # Uses the statistics function
+                cp.seek(0)
             elif choice in ("Q", "q"):
                 print("Goodbye")
                 keep_going = False  # Quits out of the program
