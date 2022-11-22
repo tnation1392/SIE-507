@@ -21,18 +21,26 @@ def translate(input): #A function to translate the letters from the column into 
 
 def assign_spot(set,x,y): # A function to open a temporary file with the carpark data and assign a given spot as occupied
     park = open("temp_park.txt","r+")  #Opens the new file for the spot assignment
-    spot = set[x][y]
+    print(x,y)
+    temp = list(set)
+    spot = temp[int(x)][int(y)]
+    print(spot)
     if spot == 'O':
         print("Reserving spot....")
-        temp = set
-        temp[x][y].replace('O','X') #If the spot is available the function replaces the O with an X
+        print(temp)
+        print(temp[x][y])
+        temp[x][y].replace('O', 'X')#If the spot is available the function replaces the O with an X
+        print(temp[x][y])
         temp = str(temp)
         park.write(temp)
         print("Spot is now reserved!")
-        park.close()
+        print(park.read())
+        main()
     else:
         print("This spot is already taken!")
-        park.close()
+        main()
+    park.close()
+
 
 def reserve(file): # A function to see if a spot is open or search for an open spot, then reserve it
     dataset = []
@@ -92,6 +100,7 @@ def reserve(file): # A function to see if a spot is open or search for an open s
             main()
         if opp == "n":
             main()
+
 def statistics(file): # a function to return the percent of the parking lot that is occupied
     contents = file.read()
     total_spots = 80
@@ -105,7 +114,7 @@ def statistics(file): # a function to return the percent of the parking lot that
 
 def menu():  #A function to print out the menu options and take an input from the user
     print(
-        "Select your choice from the menu:", '\n',  #The main menu
+        "\nSelect your choice from the menu:", '\n',  #The main menu
         "D to display current status of the car park", '\n',
         "R to reserve an empty slot in the car park", '\n',
         "S to display % occupancy of the car park", '\n',
@@ -126,6 +135,7 @@ if __name__ == '__main__':
             elif choice in ("R", "r"):
                 print('You have selected R\n')
                 reserve(cp)# Uses the reserve function
+
                 cp.seek(0)
                 print('\n')
             elif choice in ("S", "s"):
