@@ -20,26 +20,24 @@ def translate(input): #A function to translate the letters from the column into 
         exit(0)
 
 def assign_spot(set,x,y): # A function to open a temporary file with the carpark data and assign a given spot as occupied
-    park = open("temp_park.txt","r+")  #Opens the new file for the spot assignment
+    park = open("carpark.txt", "w")
     print(x,y)
-    temp = list(set)
-    spot = temp[int(x)][int(y)]
-    print(spot)
-    if spot == 'O':
+    spot = set[int(x)][int(y)] #A variable that holds the coordinates for the target spot
+    print(set)
+    if spot == 'O':  #This selects the row where spot is located and replaces the O with an X
         print("Reserving spot....")
-        print(temp)
-        print(temp[x][y])
-        temp[x][y].replace('O', 'X')#If the spot is available the function replaces the O with an X
-        print(temp[x][y])
-        temp = str(temp)
-        park.write(temp)
-        print("Spot is now reserved!")
-        print(park.read())
-        main()
+        temp_row = list(set[int(x)])
+        temp_row[int(y)] = 'X'
+        set[int(x)] = ''.join(i for i in temp_row)
     else:
         print("This spot is already taken!")
         main()
+
+    print("Spot is reserved!")
+    set = str(set)  #Transforms the dataset into a string
+    park.write(set)  #Writes the newly edited dataset to the original carpark file
     park.close()
+    main()
 
 
 def reserve(file): # A function to see if a spot is open or search for an open spot, then reserve it
@@ -66,7 +64,7 @@ def reserve(file): # A function to see if a spot is open or search for an open s
         print("Incorrect column input")
         main()
 
-    column = translate(c)  #Uses the translate function to create a numerical coordinate to use
+    column = translate(c)  #Uses the translate function to create a numerical coordinate to use instead of a letter
     if dataset[row][column] == "X":
         print("This spot is occupied")
         auto = input("Would you like to search for the closest open spot?: (y/n)")
@@ -89,7 +87,7 @@ def reserve(file): # A function to see if a spot is open or search for an open s
                 current_row += 1
                 current_column += 1
         else:
-            exit(0)
+            main()
 
     if dataset[row][column] == "O":
         print('\n')
