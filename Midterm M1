@@ -2,9 +2,9 @@
 #A program to display a view of the carpark, tell the user how full it is, and reserve a spot via functions
 cp = open("carpark.txt", "r+")
 def display(file):  # a function to read a file and integrate row numbers and letter headers in the column of the file object
-    letters = 'ABCD EFGH'
+    letters = 'ABCD EFGH'  #The letters to be displayed on top of the columns
     print(f'{letters:^15}')
-    num = 1
+    num = 1  #A variable to track the row number
     for line in file:
         if line != '\n':
             print(f'{num:^2} {line:^4}')
@@ -20,10 +20,8 @@ def translate(input): #A function to translate the letters from the column into 
         exit(0)
 
 def assign_spot(set,x,y): # A function to open a temporary file with the carpark data and assign a given spot as occupied
-    park = open("carpark.txt", "w")
-    print(x,y)
+    park = open("carpark.txt", "w+")
     spot = set[int(x)][int(y)] #A variable that holds the coordinates for the target spot
-    print(set)
     if spot == 'O':  #This selects the row where spot is located and replaces the O with an X
         print("Reserving spot....")
         temp_row = list(set[int(x)])
@@ -33,9 +31,12 @@ def assign_spot(set,x,y): # A function to open a temporary file with the carpark
         print("This spot is already taken!")
         main()
 
+    with open("carpark.txt", "w") as final: #This will write the newly updated carpark to the carpark.txt file
+        for i, a in enumerate(set):
+            print(a, file=final)  #Prints the row and writes it to the carpark.txt file
+            if i % 2 != 0:
+                print("", file=final)  #Prints the row and writes it to the carpark.txt file
     print("Spot is reserved!")
-    set = str(set)  #Transforms the dataset into a string
-    park.write(set)  #Writes the newly edited dataset to the original carpark file
     park.close()
     main()
 
@@ -50,9 +51,9 @@ def reserve(file): # A function to see if a spot is open or search for an open s
                 dataset.append(row)
     print(dataset)
     print('\n')
-    r, c = (input("Please enter the spot you would like to reserve (number then letter): "))
+    r, c = (input("Please enter the spot you would like to reserve (number then letter): "))   #An input for the spot coordinates
     row = int(r)
-    print(f'You have entered: {r}{c}') #An input for the spot coordinates
+    print(f'You have entered: {r}{c}')
 
     try:  #Error handling for the function
         if row < -1:
@@ -67,7 +68,7 @@ def reserve(file): # A function to see if a spot is open or search for an open s
     column = translate(c)  #Uses the translate function to create a numerical coordinate to use instead of a letter
     if dataset[row][column] == "X":
         print("This spot is occupied")
-        auto = input("Would you like to search for the closest open spot?: (y/n)")
+        auto = input("Would you like to search for the closest open spot?: (y/n)")  #An input for the nearest neighbor algorithm
         if auto == "y":
             current_row = current_column = 0
             max_row = len(dataset)
@@ -78,7 +79,7 @@ def reserve(file): # A function to see if a spot is open or search for an open s
                     for y in range(0, current_column):
                         if dataset[x][y] == 'O':
                             print("The closest open spot is in",x,y)
-                            take = input("Would you like to reserve this spot?: (y/n)")
+                            take = input("Would you like to reserve this spot?: (y/n)")  #An input to decide whether or not to use the assign_slot function to finalize
                             if take == "y":
                                 assign_spot(dataset,x,y)
                                 main()
@@ -101,8 +102,8 @@ def reserve(file): # A function to see if a spot is open or search for an open s
 
 def statistics(file): # a function to return the percent of the parking lot that is occupied
     contents = file.read()
-    total_spots = 80
-    xcount = 0
+    total_spots = 80  #The total number of available spots in the lot
+    xcount = 0   #A variable to count the number of taken spots
     for n in contents:
         if n == "X":
             xcount += 1
