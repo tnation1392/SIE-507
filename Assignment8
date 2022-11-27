@@ -1,0 +1,35 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Todd Nason SIE 507 Assignment 8
+
+#1:
+print('\n', "QUESTION 1")
+randline = np.random.randint(11, 30, size=[6])
+print(randline)
+
+#2:
+print('\n', "QUESTION 2")
+rand_three = np.random.random(size=[3, 3, 3])
+print(rand_three)
+
+#3:
+print('\n', "QUESTION 3")
+rand_five = np.random.random(size=[5, 5])
+rand_five = np.array(rand_five)
+print(rand_five)
+print('\n', "Minimum value:", rand_five.min())
+print("", "Maximum value:", rand_five.max())
+
+#4:
+print('\n', "QUESTION 4")
+rand_orig = np.random.random(size=10)
+rand_orig = np.array(rand_orig)
+rand_sort = np.sort(rand_orig)
+print("Original: ", rand_orig)
+print("Sorted: ", rand_sort)
+
+#5:
+print('\n', "QUESTION 5")
+file_data = np.genfromtxt("aircrafts.csv", delimiter=",", skip_header=1)
+print(file_data)
