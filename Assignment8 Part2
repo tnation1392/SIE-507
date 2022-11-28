@@ -1,0 +1,31 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+#Todd Nason SIE 507 Assignment 8 Section 2
+
+#1:
+print("QUESTION 1: See popup graph")
+set1 = [1,2,3]
+set2 = [2,4,1]
+
+plt.plot(set1, set2)
+plt.title("Sample graph")
+plt.xlabel("x-axis")
+plt.ylabel("y-axis")
+plt.show()
+
+#2:
+print('\n', "QUESTION 2: See popup graph")
+randline = np.random.randint(10, 500, size=[100])
+index = range(1,101)
+plt.scatter(index,randline)
+plt.title("Random Distribution of Integers")
+plt.xlabel("Integer Index")
+plt.ylabel("Integer Value")
+plt.show()
+
+#3:
+print('\n', "QUESTION 3: Incoming plot!")
+finance = np.genfromtxt("f_data.csv", dtype=float, delimiter=",", skip_header=1)
+finance = np.array(finance)
+print(finance)
