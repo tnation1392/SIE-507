@@ -8,17 +8,17 @@ print("QUESTION 1: See popup graph")
 set1 = [1,2,3]
 set2 = [2,4,1]
 
-plt.plot(set1, set2)
-plt.title("Sample graph")
-plt.xlabel("x-axis")
-plt.ylabel("y-axis")
+plt.plot(set1, set2)  #plots set 1 and set 2 on a line graph
+plt.title("Sample graph")  #title
+plt.xlabel("x-axis")  #X-axis label
+plt.ylabel("y-axis")  #Y-axis label
 plt.show()
 
 #2:
 print('\n', "QUESTION 2: See popup graph")
-randline = np.random.randint(10, 500, size=[100])
+randline = np.random.randint(10, 501, size=[100])  #Creates a 100-character array with random values between 10 and 500
 index = range(1,101)
-plt.scatter(index,randline)
+plt.scatter(index,randline)  #Creates a scatter plot of the array
 plt.title("Random Distribution of Integers")
 plt.xlabel("Integer Index")
 plt.ylabel("Integer Value")
@@ -26,10 +26,10 @@ plt.show()
 
 #3:
 print('\n', "QUESTION 3: Incoming plot!")
-finance = np.genfromtxt("f_data.csv", dtype=float, delimiter=",", skip_header=1)
-finance = np.array(finance)
+finance = np.genfromtxt("f_data.csv", dtype=float, delimiter=",", skip_header=1) #Imports the data from the f_data file
+finance = np.array(finance)  #Creates an array from the imported data
 
-month = finance[:,0]
+month = finance[:,0] #Creating sliced sections of the array to use for different graphs
 open = finance[:,1]
 high = finance[:,2]
 low = finance[:,3]
@@ -60,12 +60,12 @@ plt.show()
 print('\n', "QUESTION 4: See popup graph")
 world_pop = 7537
 country = ['China', 'India', 'United States', 'Indonesia', 'Brazil', 'Pakistan', 'Nigeria',
-           'Bangladesh', 'Russia', 'Japan']
+           'Bangladesh', 'Russia', 'Japan']  #A list containing the countries in the dataset
 
-country_pop = [1384, 1296, 329, 262, 208, 207, 203, 159, 142, 126]
+country_pop = [1384, 1296, 329, 262, 208, 207, 203, 159, 142, 126]  #The associated populations of the countries
 pop_percent = []
 for val in country_pop:
-    pop_percent.append(val/world_pop)
+    pop_percent.append(val/world_pop)  #Finds the percent of world population occupied by each country
 print(pop_percent)
 
 #Bar graph
