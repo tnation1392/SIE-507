@@ -58,26 +58,38 @@ plt.show()
 
 #4:
 print('\n', "QUESTION 4: See popup graph")
-world_pop = 7537
 country = ['China', 'India', 'United States', 'Indonesia', 'Brazil', 'Pakistan', 'Nigeria',
            'Bangladesh', 'Russia', 'Japan']  #A list containing the countries in the dataset
 
 country_pop = [1384, 1296, 329, 262, 208, 207, 203, 159, 142, 126]  #The associated populations of the countries
-pop_percent = []
-for val in country_pop:
-    pop_percent.append(val/world_pop)  #Finds the percent of world population occupied by each country
-print(pop_percent)
+print(sum(country_pop))
+world_pop = 7537
+other = world_pop - sum(country_pop)
+print(other)
+percent = []
+for x in country_pop:
+    x = (x/world_pop)*100
+    percent.append(x)
+print(percent)
+other_per = 100 - sum(percent)
+print(other_per)
 
 #Bar graph
 plt.subplot(2,2,1)
 plt.bar(country, country_pop)
 plt.xlabel("Country")
 plt.xticks(rotation=45, ha='right')
+plt.yticks()
 plt.ylabel("Population (Millions)")
 
 
 #Pie graph
+country.append("Rest of world")
+percent.append(other_per)
 plt.subplot(1,2,2)
-plt.pie(pop_percent, labels=country, autopct='%1.1f%%')
+colors = ['tab:blue','tab:green','tab:orange','tab:red','tab:purple','tab:pink',
+          'tab:olive','tab:cyan']
+plt.pie(percent, labels=country, autopct='%1.1f%%', colors=colors)
+plt.title("Percent of World Population per Country")
 
 plt.show()
