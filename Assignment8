@@ -1,35 +1,51 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Todd Nason SIE 507 Assignment 8
+# Todd Nason SIE 507 Assignment 8 Section 1
 
 #1:
 print('\n', "QUESTION 1")
-randline = np.random.randint(11, 30, size=[6])  #Creates a 6-character array with random numbers between 11-29
+randline = np.random.randint(11, 30, size=[6])
 print(randline)
 
 #2:
 print('\n', "QUESTION 2")
-rand_three = np.random.random(size=[3, 3, 3])  #Creates a 3x3x3 array with random values
+rand_three = np.random.random(size=[3, 3, 3])
 print(rand_three)
 
 #3:
 print('\n', "QUESTION 3")
-rand_five = np.random.random(size=[5, 5])  #Creates a 5x5 array of random values
+rand_five = np.random.random(size=[5, 5])
 rand_five = np.array(rand_five)
 print(rand_five)
-print('\n', "Minimum value:", rand_five.min())  #Displays the minimum value in the array
-print("", "Maximum value:", rand_five.max())  #Displays the maximum value in the array
+print('\n', "Minimum value:", rand_five.min())
+print("", "Maximum value:", rand_five.max())
 
 #4:
 print('\n', "QUESTION 4")
-rand_orig = np.random.random(size=10)  #Creates a 10 character array
+rand_orig = np.random.random(size=10)
 rand_orig = np.array(rand_orig)
-rand_sort = np.sort(rand_orig)  #Sorts the array from least to greatest value
+rand_sort = np.sort(rand_orig)
 print("Original: ", rand_orig)
 print("Sorted: ", rand_sort)
 
 #5:
 print('\n', "QUESTION 5")
-file_data = np.genfromtxt("aircrafts.csv", delimiter=",", skip_header=1)
-print(file_data)
+file_data = np.genfromtxt("aircrafts.csv",dtype=object, delimiter=",", skip_header=1)
+
+years = np.array(file_data[:,0], dtype=str)
+arrival = np.array(file_data[:,1],dtype=int)
+departures = np.array(file_data[:,2], dtype=int)
+
+ten = np.array((2010, np.mean(arrival[0:12]), np.mean(departures[0:12]),
+       2011, np.mean(arrival[12:24]), np.mean(departures[12:24]),
+       2012, np.mean(arrival[24:36]), np.mean(departures[24:36]),
+       2013, np.mean(arrival[36:48]), np.mean(departures[36:48]),
+       2014, np.mean(arrival[48:60]), np.mean(departures[48:60]),
+       2015, np.mean(arrival[60:72]), np.mean(departures[60:72]),))
+
+ten.shape = (6,3)
+print('\n',ten)
+
+
+
