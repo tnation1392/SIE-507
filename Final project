@@ -1,1 +1,23 @@
+import numpy as np
+import matplotlib as plt
+
+births = np.genfromtxt('US_births_1994_2014_monthly.csv', delimiter=',', skip_header=True, dtype=int)
+print(births)
+
+avg = np.mean(births[:, 2])
+avg = "{:.0f}".format(round(avg, 0))
+most = births[:, 2].max()
+least = births[:, 2].min()
+middle = "{:.0f}".format(np.median(births[:, 2]))
+sd = "{:.2f}".format(np.std(births[:, 2]))
+
+stats = np.array([avg,most,least,middle,sd])
+stats = stats.reshape(5,1)
+print(stats)
+
+print("Average births per month:", avg)
+print("Most births in a month:", most)
+print("Least births in a month:", least)
+print("Middle value:", middle)
+print("Standard Deviation: +/-", sd)
 
