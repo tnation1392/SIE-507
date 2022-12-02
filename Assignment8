@@ -59,94 +59,93 @@ print(arr, sep=" ")
 
 #Part 2
 
-# #1:
-# print("QUESTION 1: See popup graph")
-# set1 = [1,2,3]
-# set2 = [2,4,1]
-#
-# plt.plot(set1, set2)  #plots set 1 and set 2 on a line graph
-# plt.title("Sample graph")  #title
-# plt.xlabel("x-axis")  #X-axis label
-# plt.ylabel("y-axis")  #Y-axis label
-# plt.show()
-#
-# #2:
-# print('\n', "QUESTION 2: See popup graph")
-# randline = np.random.randint(10, 501, size=[100])  #Creates a 100-character array with random values between 10 and 500
-# index = range(1,101)
-# plt.scatter(index,randline)  #Creates a scatter plot of the array
-# plt.title("Random Distribution of Integers")
-# plt.xlabel("Integer Index")
-# plt.ylabel("Integer Value")
-# plt.show()
-#
-# #3:
-# print('\n', "QUESTION 3: Incoming plot!")
-# finance = np.genfromtxt("f_data.csv", dtype=float, delimiter=",", skip_header=1) #Imports the data from the f_data file
-# finance = np.array(finance)  #Creates an array from the imported data
-#
-# month = finance[:,0] #Creating sliced sections of the array to use for different graphs
-# open = finance[:,1]
-# high = finance[:,2]
-# low = finance[:,3]
-# close = finance[:,4]
-#
-# #First line
-# plt.plot(month, open, 'g-', label='Open')
-# plt.legend()
-#
-# #Second line
-# plt.plot(month, high, 'y-', label='High')
-# plt.legend()
-#
-# #Third line
-# plt.plot(month, low, 'b-',label='Low')
-# plt.legend()
-#
-# #Fourth line
-# plt.plot(month, close, 'r-', label='Close')
-# plt.legend()
-#
-# plt.title("ABC Inc. Financial Data")
-# plt.xlabel("Month")
-# plt.ylabel("Value")
-# plt.show()
-#
-# #4:
-# print('\n', "QUESTION 4: See popup graph")
-# country = ['China', 'India', 'United States', 'Indonesia', 'Brazil', 'Pakistan', 'Nigeria',
-#            'Bangladesh', 'Russia', 'Japan']  #A list containing the countries in the dataset
-#
-# country_pop = [1384, 1296, 329, 262, 208, 207, 203, 159, 142, 126]  #The associated populations of the countries
-# world_pop = 7537
-# other = world_pop - sum(country_pop)
-# percent = []
-# for x in country_pop:  #This takes the population of each country and finds the percentage of the world population it is
-#     x = (x/world_pop)*100
-#     percent.append(x)
-# other_per = 100 - sum(percent)
-#
-#
-# #Bar graph
-# plt.subplot(2,2,1)  #Creates a bar graph showing the listed countries and their associated populations
-# plt.bar(country, country_pop)
-# plt.xlabel("Country")
-# plt.xticks(rotation=45, ha='right')
-# plt.yticks()
-# plt.ylabel("Population (Millions)")
-#
-#
-# #Pie graph
-# country.append("Rest of world")
-# percent.append(other_per)
-# plt.subplot(1,2,2)
-# colors = ['tab:blue','tab:green','tab:orange','tab:red','tab:purple','tab:pink',
-#           'tab:olive','tab:cyan']
-# plt.pie(percent, labels=country, autopct='%1.1f%%', colors=colors) 
-#Creates a pie chart showing the percentages of world population that each country inhabits
-# plt.title("Percent of World Population per Country")
-#
-# plt.show()
+#1:
+print("QUESTION 1: See popup graph")
+set1 = [1,2,3]
+set2 = [2,4,1]
+
+plt.plot(set1, set2)  #plots set 1 and set 2 on a line graph
+plt.title("Sample graph")  #title
+plt.xlabel("x-axis")  #X-axis label
+plt.ylabel("y-axis")  #Y-axis label
+plt.show()
+
+#2:
+print('\n', "QUESTION 2: See popup graph")
+randline = np.random.randint(10, 501, size=[100])  #Creates a 100-character array with random values between 10 and 500
+index = range(1,101)
+plt.scatter(index,randline)  #Creates a scatter plot of the array
+plt.title("Random Distribution of Integers")
+plt.xlabel("Integer Index")
+plt.ylabel("Integer Value")
+plt.show()
+
+#3:
+print('\n', "QUESTION 3: Incoming plot!")
+finance = np.genfromtxt("f_data.csv", dtype=float, delimiter=",", skip_header=1) #Imports the data from the f_data file
+finance = np.array(finance)  #Creates an array from the imported data
+
+month = finance[:,0] #Creating sliced sections of the array to use for different graphs
+open = finance[:,1]
+high = finance[:,2]
+low = finance[:,3]
+close = finance[:,4]
+
+#First line
+plt.plot(month, open, 'g-', label='Open')
+plt.legend()
+
+#Second line
+plt.plot(month, high, 'y-', label='High')
+plt.legend()
+
+#Third line
+plt.plot(month, low, 'b-',label='Low')
+plt.legend()
+
+#Fourth line
+plt.plot(month, close, 'r-', label='Close')
+plt.legend()
+
+plt.title("ABC Inc. Financial Data")
+plt.xlabel("Month")
+plt.ylabel("Value")
+plt.show()
+
+#4:
+print('\n', "QUESTION 4: See popup graph")
+country = ['China', 'India', 'United States', 'Indonesia', 'Brazil', 'Pakistan', 'Nigeria',
+           'Bangladesh', 'Russia', 'Japan']  #A list containing the countries in the dataset
+
+country_pop = [1384, 1296, 329, 262, 208, 207, 203, 159, 142, 126]  #The associated populations of the countries
+world_pop = 7537
+other = world_pop - sum(country_pop)
+percent = []
+for x in country_pop:  #This takes the population of each country and finds the percentage of the world population it is
+    x = (x/world_pop)*100
+    percent.append(x)
+other_per = 100 - sum(percent)
+
+
+#Bar graph
+plt.subplot(2,2,1)  #Creates a bar graph showing the listed countries and their associated populations
+plt.bar(country, country_pop)
+plt.xlabel("Country")
+plt.xticks(rotation=45, ha='right')
+plt.yticks()
+plt.ylabel("Population (Millions)")
+
+
+#Pie graph
+country.append("Rest of world")
+percent.append(other_per)
+plt.subplot(1,2,2)
+colors = ['tab:blue','tab:green','tab:orange','tab:red','tab:purple','tab:pink',
+          'tab:olive','tab:cyan']
+plt.pie(percent, labels=country, autopct='%1.1f%%', colors=colors)  #Creates a pie chart showing the percentages of world population that each country inhabits
+plt.title("Percent of World Population per Country")
+
+plt.show()
 
 #5:
 print('\n', "QUESTION 5: See popup graph")
