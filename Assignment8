@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 #1:
 print('\n', "QUESTION 1")
-randline = np.random.randint(11, 30, size=[6])
+randline = np.random.randint(11, 30, size=[6])  #Creates a linear array with 6 integers between 11 and 29
 print(randline)
 
 #2:
