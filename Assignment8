@@ -39,7 +39,7 @@ departures = np.array(file_data[:,2], dtype=int)  #creates an array with the val
 
 headers = ["Year", "  Arrival ", "Departure"]
 
-  #This section creates lists sliced from the file based on the date, and contains the averages for 
+  #This section creates lists sliced from the file based on the date, and contains the averages for
   #arrivals and departures within the year
 ten = [2010, np.mean(arrival[0:12]), np.mean(departures[0:12])]
 ten = np.round(ten,decimals=2)
@@ -153,23 +153,24 @@ year = [2010, 2011, 2012, 2013,2014,2015]
 here = [ten[1],eleven[1],twelve[1],thirteen[1],fourteen[1],fifteen[1]]  #creates a list containing the amound of arrivals annually
 there = [ten[2],eleven[2],twelve[2],thirteen[2],fourteen[2],fifteen[2]]  #creates a list containing the amount of departures annually
 
-n = 6
-r = np.arange(n)
-width = .5
+r = np.arange(len(year))  #a variable to set the individual years for both sets of bars
+width = .5  #An integer to offset the second set of bars so they are visible
 
 plt.subplot(1,2,1)
 plt.bar(r, here, 0.4, label='Arrivals',color='g')  #Creates a bar chart comparing the two list of arrivals and departures
-plt.bar(r + width, there, 0.4, label='Departures',color='r')
+plt.bar(r + width, there, 0.4, label='Departures', color='r')
 plt.xlabel("Year")
+plt.xticks(r, year)
 plt.ylabel("Average Annual Amount")
 plt.title("Annual Arrivals and Departures")
 plt.legend()
 
 plt.subplot(1,2,2)
-plt.scatter(r,here,label="Arrivals")  #Creates a scatter plot that compares the two lists
-plt.scatter(r+width,there,label="Departures")
+plt.scatter(r, here, label="Arrivals")  #Creates a scatter plot that compares the two lists
+plt.scatter(r + width, there, label="Departures")
 plt.title("Annual Arrivals and Departures")
 plt.xlabel("Year")
+plt.xticks(r, year)
 plt.ylabel("Average Annual Amount")
 plt.legend()
 
