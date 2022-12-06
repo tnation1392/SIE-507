@@ -57,6 +57,13 @@ indiv = indiv.reshape(21,1)
 final_year = np.column_stack((indiv,annual))
 print(final_year, '\n')
 
+print("Annual Birth Statistics:")
+print('Max:', "{:.0f}".format(np.max(final_year[:,1])))
+print('Min:', "{:.0f}".format(np.min(final_year[:,1])))
+print('Median:', "{:.0f}".format(np.median(final_year[:,1])))
+print('Mean:',"{:.0f}".format(np.mean(final_year[:,1])))
+print('SD:', "+/-", "{:.1f}".format(np.std(final_year[:,1])))
+print('\n')
 plt.plot(final_year[:,0], final_year[:, 1],'g.-')
 plt.title("Annual Childbirth Rate")
 plt.xlabel("Year")
@@ -64,16 +71,10 @@ plt.ylabel("Births (Millions)")
 plt.xticks(np.arange(1994,2015), rotation='vertical')
 plt.show()
 
-
 plt.boxplot(final_year[:,1])
 plt.title("Distribution of Annual Childbirth Amounts")
 plt.ylabel("Births per Year (Millions)")
-print("Boxplot Stats:")
-print('Max:', np.max(final_year[:,1]))
-print('Min:', np.min(final_year[:,1]))
-print('Median:', np.median(final_year[:,1]))
-print('Mean:',np.mean(final_year[:,1]))
-print('SD:', np.std(final_year[:,1]))
+
 plt.show()
 
 decades = [by_decade(1994,2003),by_decade(2004,2013),births[-1][2]]
@@ -91,7 +92,14 @@ monthly = [(by_month(1)),(by_month(2)),(by_month(3)),(by_month(4)),(by_month(5))
 monthly = np.array(monthly)
 monthly = monthly.reshape(12,1)
 final_month = np.column_stack((names,monthly))
-print(final_month)
+print(final_month,'\n')
+
+print("Monthly Birth Statistics:")
+print('Max:', "{:.0f}".format(np.max(monthly[:,0])))
+print('Min:', "{:.0f}".format(np.min(monthly[:,0])))
+print('Median:', "{:.0f}".format(np.median(monthly[:,0])))
+print('Mean:',"{:.0f}".format(np.mean(monthly[:,0])))
+print('SD:',"+/-", "{:.1f}".format(np.std(monthly[:,0])))
 
 plt.subplot(2,1,2)
 plt.plot(names[:, 0], monthly[:, 0],'g.-')
@@ -106,9 +114,6 @@ summer = sum(monthly[5]+monthly[6]+monthly[7])
 fall = sum(monthly[8]+monthly[9]+monthly[10])
 winter = sum(monthly[11]+monthly[0]+monthly[1])
 sum_seasons = [spring,summer,fall,winter]
-print(sum_seasons)
 plt.pie(sum_seasons, labels=seasons, autopct='%1.1f%%')
 plt.title("Childbirths per Season")
-
-
 plt.show()
