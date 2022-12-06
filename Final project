@@ -57,6 +57,25 @@ indiv = indiv.reshape(21,1)
 final_year = np.column_stack((indiv,annual))
 print(final_year, '\n')
 
+plt.plot(final_year[:,0], final_year[:, 1],'g.-')
+plt.title("Annual Childbirth Rate")
+plt.xlabel("Year")
+plt.ylabel("Births (Millions)")
+plt.xticks(np.arange(1994,2015), rotation='vertical')
+plt.show()
+
+
+plt.boxplot(final_year[:,1])
+plt.title("Distribution of Annual Childbirth Amounts")
+plt.ylabel("Births per Year (Millions)")
+print("Boxplot Stats:")
+print('Max:', np.max(final_year[:,1]))
+print('Min:', np.min(final_year[:,1]))
+print('Median:', np.median(final_year[:,1]))
+print('Mean:',np.mean(final_year[:,1]))
+print('SD:', np.std(final_year[:,1]))
+plt.show()
+
 decades = [by_decade(1994,2003),by_decade(2004,2013),births[-1][2]]
 decades = np.array(decades,dtype=int)
 decades = decades.reshape(3,1)
