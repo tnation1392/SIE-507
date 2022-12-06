@@ -1,8 +1,7 @@
 import numpy as np
-import matplotlib as plt
+import matplotlib.pyplot as plt
 
 births = np.genfromtxt('US_births_1994_2014_monthly.csv', delimiter=',', skip_header=True, dtype=int)
-print(births)
 
 def by_year(year):
     set = []
@@ -13,6 +12,24 @@ def by_year(year):
         year_group = np.sum(year_group)
     return year_group
 
+def by_decade(low,high):
+    set = []
+    for row in births:
+        if low <= row[0] <= high:
+            set.append(row)
+        dec_group = np.array(set,dtype=int)
+        dec_group = np.sum(dec_group)
+    return dec_group
+
+def by_month(month):
+    set = []
+    for row in births:
+        if row[1] == month:
+            set.append(row)
+        month_group = np.array(set,dtype=int)
+        month_group = np.sum(month_group)
+    return month_group
+
 avg = np.mean(births[:, 2])
 avg = "{:.0f}".format(round(avg, 0))
 most = births[:, 2].max()
@@ -22,7 +39,6 @@ sd = "{:.2f}".format(np.std(births[:, 2]))
 
 stats = np.array([avg,most,least,middle,sd])
 stats = stats.reshape(5,1)
-print(stats)
 
 print("Average births per month:", avg)
 print("Most births in a month:", most)
@@ -36,10 +52,44 @@ by_year(2002),by_year(2003),by_year(2004),by_year(2005),by_year(2006),by_year(20
 by_year(2011),by_year(2012),by_year(2013),by_year(2014)]
 annual = np.array(annual,dtype=int)
 annual = annual.reshape(21,1)
-
 indiv = np.arange(1994,2015)
 indiv = indiv.reshape(21,1)
+final_year = np.column_stack((indiv,annual))
+print(final_year, '\n')
 
-final_array = np.column_stack((indiv,annual))
-print(final_array)
+decades = [by_decade(1994,2003),by_decade(2004,2013),births[-1][2]]
+decades = np.array(decades,dtype=int)
+decades = decades.reshape(3,1)
+tens = ["1994-2003", "2004-2013", "2014:"]
+final_decades = np.column_stack((tens,decades))
+print(final_decades,'\n')
 
+names = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+names = np.array(names)
+names = names.reshape(12,1)
+monthly = [(by_month(1)),(by_month(2)),(by_month(3)),(by_month(4)),(by_month(5)),(by_month(6)),
+(by_month(7)),(by_month(8)),(by_month(9)),(by_month(10)),(by_month(11)),(by_month(12))]
+monthly = np.array(monthly)
+monthly = monthly.reshape(12,1)
+final_month = np.column_stack((names,monthly))
+print(final_month)
+
+plt.subplot(2,1,2)
+plt.plot(names[:, 0], monthly[:, 0],'g.-')
+plt.title("Chilbirths per Month")
+plt.ylabel("Births per Month (Millions)")
+plt.xlabel("Month")
+
+plt.subplot(2,1,1)
+seasons = ['Spring','Summer','Fall','Winter']
+spring = sum(monthly[2]+monthly[3]+monthly[4])
+summer = sum(monthly[5]+monthly[6]+monthly[7])
+fall = sum(monthly[8]+monthly[9]+monthly[10])
+winter = sum(monthly[11]+monthly[0]+monthly[1])
+sum_seasons = [spring,summer,fall,winter]
+print(sum_seasons)
+plt.pie(sum_seasons, labels=seasons, autopct='%1.1f%%')
+plt.title("Childbirths per Season")
+
+
+plt.show()
