@@ -40,8 +40,6 @@ least = births[:, 2].min()  #Returns the mimimum value of the original set
 middle = "{:.0f}".format(np.median(births[:, 2]))  #Returns the median value of the original set
 sd = "{:.2f}".format(np.std(births[:, 2]))  #Returns the standard deviation of the original set
 
-stats = np.array([avg,most,least,middle,sd])
-stats = stats.reshape(5,1)
 
 annual = [by_year(1994),by_year(1995),by_year(1996),by_year(1997),by_year(1998),by_year(1999),by_year(2000),by_year(2001),
 by_year(2002),by_year(2003),by_year(2004),by_year(2005),by_year(2006),by_year(2007),by_year(2008),by_year(2009),by_year(2010),
@@ -76,7 +74,6 @@ plt.show()
 ten_yrs = [by_decade(1994,2003),by_decade(2004,2013),by_decade(2014,2014)]
 tens = ["1994-2003", "2004-2013", "2014:"]
 final_decades = np.column_stack((tens,ten_yrs))
-print(final_decades,'\n')
 
 print("Average birthrates per decade:")
 print('1994-2003:',"{:.0f}".format(np.mean(ten_yrs[0][:,2])))
@@ -101,7 +98,7 @@ plt.legend()
 plt.show()
 
 names = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-names = np.array(names)
+names = np.array(names,dtype='str')
 names = names.reshape(12,1)
 monthly = [(by_month(1)),(by_month(2)),(by_month(3)),(by_month(4)),(by_month(5)),(by_month(6)),
 (by_month(7)),(by_month(8)),(by_month(9)),(by_month(10)),(by_month(11)),(by_month(12))]
@@ -130,6 +127,7 @@ summer = sum(monthly[5]+monthly[6]+monthly[7])
 fall = sum(monthly[8]+monthly[9]+monthly[10])
 winter = sum(monthly[11]+monthly[0]+monthly[1])
 sum_seasons = [spring,summer,fall,winter]
+
 plt.pie(sum_seasons, labels=seasons, autopct='%1.1f%%')
 plt.title("Childbirths per Season")
 plt.show()
