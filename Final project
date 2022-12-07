@@ -1,50 +1,47 @@
+#SIE 507 Final Project TN
+#A program to plot and analyze a dataset of monthly births over a period of years
+
 import numpy as np
 import matplotlib.pyplot as plt
 
 births = np.genfromtxt('US_births_1994_2014_monthly.csv', delimiter=',', skip_header=True, dtype=int)
+#imports the .csv file containing the dataset and turns it into a numpy array
 
-def by_year(year):
+def by_year(year):  #A function that takes a portion of the dataset by year and returns the sum total of births for that year
     set = []
     for row in births:
         if row[0] == year:
-            set.append(row)
-        year_group = np.array(set,dtype=int)
-        year_group = np.sum(year_group)
+            set.append(row)  #if the row contains the entered year then it is appended to the set list
+        year_group = np.array(set,dtype=int)  #creates an array from the set list with integers
+        year_group = np.sum(year_group)  #finds the sum of the set list
     return year_group
 
-def by_decade(low,high):
+def by_decade(low,high):  #A function that takes a range of years and creates an array based on the given years
     set = []
     for row in births:
         if low <= row[0] <= high:
-            set.append(row)
-        dec_group = np.array(set,dtype=int)
+            set.append(row)  #if the row contains a year in the range then it is appended to the set list
+        dec_group = np.array(set,dtype=int)  #creates an array from the set list with integers
     return dec_group
 
-def by_month(month):
+def by_month(month):  #A function that takes a monthly input and returns an array with all values from that month
     set = []
     for row in births:
         if row[1] == month:
-            set.append(row)
-        month_group = np.array(set,dtype=int)
-        month_group = np.sum(month_group)
+            set.append(row)  #If the row contains the month then it is appended to the set list
+        month_group = np.array(set,dtype=int)  #creates an array of the set list with integers
+        month_group = np.sum(month_group)  #returns the sum total of all births in that month
     return month_group
 
-avg = np.mean(births[:, 2])
-avg = "{:.0f}".format(round(avg, 0))
-most = births[:, 2].max()
-least = births[:, 2].min()
-middle = "{:.0f}".format(np.median(births[:, 2]))
-sd = "{:.2f}".format(np.std(births[:, 2]))
+avg = np.mean(births[:, 2])  #a value that contains the mean of the original dataset
+avg = "{:.0f}".format(round(avg, 0))  #rounds the mean to no decimal points
+most = births[:, 2].max()  #Returns the maximum value of the original set
+least = births[:, 2].min()  #Returns the mimimum value of the original set
+middle = "{:.0f}".format(np.median(births[:, 2]))  #Returns the median value of the original set
+sd = "{:.2f}".format(np.std(births[:, 2]))  #Returns the standard deviation of the original set
 
 stats = np.array([avg,most,least,middle,sd])
 stats = stats.reshape(5,1)
-
-print("Average births per month:", avg)
-print("Most births in a month:", most)
-print("Least births in a month:", least)
-print("Middle value:", middle)
-print("Standard Deviation: +/-", sd)
-print('\n')
 
 annual = [by_year(1994),by_year(1995),by_year(1996),by_year(1997),by_year(1998),by_year(1999),by_year(2000),by_year(2001),
 by_year(2002),by_year(2003),by_year(2004),by_year(2005),by_year(2006),by_year(2007),by_year(2008),by_year(2009),by_year(2010),
@@ -63,6 +60,7 @@ print('Median:', "{:.0f}".format(np.median(final_year[:,1])))
 print('Mean:',"{:.0f}".format(np.mean(final_year[:,1])))
 print('SD:', "+/-", "{:.1f}".format(np.std(final_year[:,1])))
 print('\n')
+
 plt.plot(final_year[:,0], final_year[:, 1],'g.-')
 plt.title("Annual Childbirth Rate")
 plt.xlabel("Year")
@@ -75,7 +73,6 @@ plt.title("Distribution of Annual Childbirth Amounts")
 plt.ylabel("Births per Year (Millions)")
 plt.show()
 
-
 ten_yrs = [by_decade(1994,2003),by_decade(2004,2013),by_decade(2014,2014)]
 tens = ["1994-2003", "2004-2013", "2014:"]
 final_decades = np.column_stack((tens,ten_yrs))
@@ -85,6 +82,7 @@ print("Average birthrates per decade:")
 print('1994-2003:',"{:.0f}".format(np.mean(ten_yrs[0][:,2])))
 print('2004-2013:',"{:.0f}".format(np.mean(ten_yrs[1][:,2])))
 print('2014:',"{:.0f}".format(np.mean(ten_yrs[2][:,2])))
+print('\n')
 
 plt.boxplot([ten_yrs[0][:,2],ten_yrs[1][:,2],ten_yrs[2][:,2]])
 plt.xticks([1,2,3],['1994-2003','2004-2013','2014 (Only one year)'])
@@ -101,7 +99,6 @@ plt.xlabel("Month")
 plt.ylabel("Monthly Births(Millions)")
 plt.legend()
 plt.show()
-
 
 names = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 names = np.array(names)
