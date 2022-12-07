@@ -73,19 +73,33 @@ plt.show()
 plt.boxplot(final_year[:,1])
 plt.title("Distribution of Annual Childbirth Amounts")
 plt.ylabel("Births per Year (Millions)")
-
 plt.show()
 
-ten_yrs = [by_decade(1994,2003),by_decade(2004,2013),births[-1][2]]
+
+ten_yrs = [by_decade(1994,2003),by_decade(2004,2013),by_decade(2014,2014)]
 tens = ["1994-2003", "2004-2013", "2014:"]
 final_decades = np.column_stack((tens,ten_yrs))
 print(final_decades,'\n')
 
-plt.boxplot([ten_yrs[0][:,2],ten_yrs[1][:,2],ten_yrs[2]])
-plt.xticks([1,2,3],['1994-2003','2004-2013','2014'])
+print("Average birthrates per decade:")
+print('1994-2003:',"{:.0f}".format(np.mean(ten_yrs[0][:,2])))
+print('2004-2013:',"{:.0f}".format(np.mean(ten_yrs[1][:,2])))
+print('2014:',"{:.0f}".format(np.mean(ten_yrs[2][:,2])))
+
+plt.boxplot([ten_yrs[0][:,2],ten_yrs[1][:,2],ten_yrs[2][:,2]])
+plt.xticks([1,2,3],['1994-2003','2004-2013','2014 (Only one year)'])
 plt.xlabel("Group of Years")
-plt.ylabel("Range of Monthly Births")
-plt.title("Comparison of Ten-Year Value Ranges for Births")
+plt.ylabel("Monthly Births")
+plt.title("Distribution of Ten-Year Value Ranges for Births")
+plt.show()
+
+plt.plot(range(120),ten_yrs[0][:,2],'g.-',label='1994,2003')
+plt.plot(range(120),ten_yrs[1][:,2],'b.-',label='2004-2013')
+plt.plot(range(12),ten_yrs[2][:,2],'y.-',label='2014')
+plt.title("Birth Rate Comparison of Ten-Year Groups")
+plt.xlabel("Month")
+plt.ylabel("Monthly Births(Millions)")
+plt.legend()
 plt.show()
 
 
