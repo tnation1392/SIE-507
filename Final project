@@ -12,7 +12,7 @@ def by_year(year):  #A function that takes a portion of the dataset by year and 
     for row in births:
         if row[0] == year:
             set.append(row)  #if the row contains the entered year then it is appended to the set list
-        year_group = np.array(set,dtype=int)  #creates an array from the set list with integers
+        year_group = np.array(set, dtype=int)  #creates an array from the set list with integers
         year_group = np.sum(year_group)  #finds the sum of the set list
     return year_group
 
@@ -21,7 +21,7 @@ def by_decade(low,high):  #A function that takes a range of years and creates an
     for row in births:
         if low <= row[0] <= high:
             set.append(row)  #if the row contains a year in the range then it is appended to the set list
-        dec_group = np.array(set,dtype=int)  #creates an array from the set list with integers
+        dec_group = np.array(set, dtype=int)  #creates an array from the set list with integers
     return dec_group
 
 def by_month(month):  #A function that takes a monthly input and returns an array with all values from that month
@@ -29,7 +29,7 @@ def by_month(month):  #A function that takes a monthly input and returns an arra
     for row in births:
         if row[1] == month:
             set.append(row)  #If the row contains the month then it is appended to the set list
-        month_group = np.array(set,dtype=int)  #creates an array of the set list with integers
+        month_group = np.array(set, dtype=int)  #creates an array of the set list with integers
         month_group = np.sum(month_group)  #returns the sum total of all births in that month
     return month_group
 
@@ -40,36 +40,40 @@ least = births[:, 2].min()  #Returns the mimimum value of the original set
 middle = "{:.0f}".format(np.median(births[:, 2]))  #Returns the median value of the original set
 sd = "{:.2f}".format(np.std(births[:, 2]))  #Returns the standard deviation of the original set
 
+#-----------------------------------------------------------------------------------------------------------------------
+#The annual birth arrangement
 
-annual = [by_year(1994),by_year(1995),by_year(1996),by_year(1997),by_year(1998),by_year(1999),by_year(2000),by_year(2001),
-by_year(2002),by_year(2003),by_year(2004),by_year(2005),by_year(2006),by_year(2007),by_year(2008),by_year(2009),by_year(2010),
-by_year(2011),by_year(2012),by_year(2013),by_year(2014)]
-annual = np.array(annual,dtype=int)
-annual = annual.reshape(21,1)
-indiv = np.arange(1994,2015)
-indiv = indiv.reshape(21,1)
-final_year = np.column_stack((indiv,annual))
+annual = [by_year(1994), by_year(1995), by_year(1996), by_year(1997), by_year(1998), by_year(1999), by_year(2000), by_year(2001),
+by_year(2002), by_year(2003), by_year(2004), by_year(2005), by_year(2006), by_year(2007), by_year(2008), by_year(2009), by_year(2010),
+by_year(2011), by_year(2012), by_year(2013), by_year(2014)]  #a list containing the sums of annual births
+annual = np.array(annual, dtype=int)  #creating an array from the annual list
+annual = annual.reshape(21, 1)  #reshapes the array
+indiv = np.arange(1994, 2015)  #a value containing the range of years from the dataset
+indiv = indiv.reshape(21, 1)  #reshapes the indiv value
+final_year = np.column_stack((indiv, annual))  #creates an array by combining the two values
 print(final_year, '\n')
 
-print("Annual Birth Statistics:")
-print('Max:', "{:.0f}".format(np.max(final_year[:,1])))
-print('Min:', "{:.0f}".format(np.min(final_year[:,1])))
-print('Median:', "{:.0f}".format(np.median(final_year[:,1])))
-print('Mean:',"{:.0f}".format(np.mean(final_year[:,1])))
-print('SD:', "+/-", "{:.1f}".format(np.std(final_year[:,1])))
+print("Annual Birth Statistics:")  #Printing Annual Statistics
+print('Max:', "{:.0f}".format(np.max(final_year[:, 1])))
+print('Min:', "{:.0f}".format(np.min(final_year[:, 1])))
+print('Median:', "{:.0f}".format(np.median(final_year[:, 1])))
+print('Mean:', "{:.0f}".format(np.mean(final_year[:, 1])))
+print('SD:', "+/-", "{:.1f}".format(np.std(final_year[:, 1])))
 print('\n')
 
-plt.plot(final_year[:,0], final_year[:, 1],'g.-')
+plt.plot(final_year[:, 0], final_year[:, 1], 'g.-') #Creates a line graph showing the births per year
 plt.title("Annual Childbirth Rate")
 plt.xlabel("Year")
 plt.ylabel("Births (Millions)")
-plt.xticks(np.arange(1994,2015), rotation='vertical')
+plt.xticks(np.arange(1994,2015), rotation='vertical')  #rotates the x-axis ticks to make more space
 plt.show()
 
-plt.boxplot(final_year[:,1])
+plt.boxplot(final_year[:,1])  #creates a boxplot showing the distribution of all of the annual sums
 plt.title("Distribution of Annual Childbirth Amounts")
 plt.ylabel("Births per Year (Millions)")
 plt.show()
+#---------------------------------------------------------------------------------------------------------------------#
+#The ten-year birth arrangement
 
 ten_yrs = [by_decade(1994,2003),by_decade(2004,2013),by_decade(2014,2014)]
 tens = ["1994-2003", "2004-2013", "2014:"]
